@@ -1,7 +1,0 @@
-{
-    "name":"I want to see the Han River",
-    "description":"가끔 인생을 살다 보면 한강물 온도를 체크하고 싶어 질 때가 있습니다. 이 프로그램은 브라우저에서 한강 물 온도를 보여주고 아직 세상은 살만하다고 메세지를 전해줍니다.",
-    "version":"1.0",
-    "permissions":["activeTab"],
-    "manifest_version":3
-}
