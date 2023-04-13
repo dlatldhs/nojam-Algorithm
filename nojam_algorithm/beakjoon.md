@@ -34,6 +34,38 @@ int main () {
 ---
 ### 2309 일곱 난쟁이( 미완 )
 ```cpp
+// variable 선언
+#include <bits/stdc++.h>
+using namespace std;
+int a[13];
+int n = 9 , k = 7 , sum ;
+int main() {
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+// int tpye의 9개 배열 입력 받기
+    for ( int i = 0 ; i < n ; i++ ) {
+        cin >> a[i];
+    }
+// sort 오름차순 정렬
+    sort(a,a+9,less<int>());
+    
+// combination or permutation
+    do {
+        sum = 0 ;
+        for ( int i = 0 ; i < k ; i++ ) {
+            sum += a[i];
+        }
+        // 종료 조건
+        if ( sum == 100 ) break;
+    } while ( next_permutation(&a[0],&a[9]) );
+// printAll
+    
+    for ( int i = 0 ; i < k ; i++ ) {
+        cout << a[i] << "\n";
+    }
+    return 0;
+}
+```
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 int a[9];
