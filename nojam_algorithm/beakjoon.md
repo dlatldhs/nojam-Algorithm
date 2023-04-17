@@ -3,6 +3,33 @@
 
 ## 실버
 -------
+### 9996
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int n;
+string s, ori_s, pre, suf; // 접두사 접미사
+int main() {
+  cin >> n;
+  cin >> ori_s;
+  int pos = ori_s.find("*");   // 10
+  pre = ori_s.substr(0, pos);  // pos는 포함 X index 0 ~ 9 10개
+  suf = ori_s.substr(pos + 1); // 11 부터 싹다
+  for (int i = 0; i < n; i++) {
+    cin >> s;
+    if (pre.size() + suf.size() > s.size()) { // 입력으로 받은 파일 사이즈가 패턴 사이즈 합친 것 보다 작은 경우
+      cout << "NE\n";
+    } else {
+      if (pre == s.substr(0, pre.size()) && // s.substr(0,pre.size()) 는 문자열이 결과값으로 나옴 0부터 pre.size()개 만큼
+          suf == s.substr(s.size() - suf.size())) { // 받은 파일 문자열 크기에서 뒤에 패턴 크기만 빼서 뒤에 패턴이 시작되는 index를 구해서 거기서 부터 다 가져오게 해서 체크함
+        cout << "DA\n";
+      } else {
+        cout << "NE\n";
+      }
+    }
+  }
+}
+```
 ### 10773 제로
 ```cpp
 #include <bits/stdc++.h>
@@ -183,6 +210,52 @@ int main() {
   reverse(temp.begin() , temp.end() );
   if ( temp == s ) cout << 1;
   else cout << 0;
+  return 0;
+}
+```
+### 11655 ROT13
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+string s,ret;
+char rot;
+int main() {
+  // 1. 문자열인 s를 입력받습니다. 공백 포함 하려면 getline 사용
+  ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+  getline(cin,s);
+  
+  // 2. s의 요소 하나하나를 검사하며 65 ~ 90 안에 들어가거나 97 ~ 122 안에 들어간다면 알파벳 대/소문자 임을 인지하고 +13 해서 ret에 넣는다.
+  for ( char it : s ) {
+    // a ~ z or A ~ Z
+    if ( (65 <= it && 90 >= it) || (97 <= it && 122 >= it)) {
+      
+      // it 이 대문자안에 있고 , ROT13 했을 때 대문자의 범위보다 크다면 즉 91 이상이라면
+      if ( 90 >= it && it+13 > 90 ) {
+        // cout << it << " " << it+13 << "\n";
+        rot = it-13;
+      }
+        
+      // it 이 소문자안에 있고 , ROT13 했을 때 소문자의 범위보다 크다면 즉 123 이상이라면
+      else if (122 >= it && it+13 > 122) {
+        rot = it-13;
+      }
+      
+      else { // 더해도 알파벳 범위 안에 있는 단어인 경우
+        rot = it+13;
+      }
+      
+      ret.push_back(rot);
+      
+    } else {// 3. 만약 알파벳 문자열이 아니라면(문자 or 숫자) 걍 넣는다.
+      ret.push_back(it);
+    }
+  }
+
+  // 5. for을 사용하여 ret을 출력한다.
+  for ( auto it : ret ) {
+    cout << it;
+  }
+
   return 0;
 }
 ```
