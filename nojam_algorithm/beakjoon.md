@@ -3,6 +3,36 @@
 
 ## 실버
 -------
+### 1620번: 나는야 포켓몬 마스터 이다솜
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int n ,m;
+string s;
+map<string,int> mp;
+string a[100004];
+int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+
+  cin >> n >> m;
+  for ( int i = 1 ; i <= n ; i++ ) {
+    cin >> s;
+    mp[s] = i; // mp.insert({s,i}); 이거 둘이 같은 의미인거 기억
+    a[i] = s;
+  }
+  for (int i = 0 ; i< m; i++ ) {
+    cin >> s;
+    if ( atoi(s.c_str()) ) {
+      cout << a[atoi(s.c_str())] << "\n";
+    } else {
+      cout << mp[s] << "\n";
+    }
+  }
+  return 0;
+}
+```
 ### 2559
 ```cpp
 #include <bits/stdc++.h>
