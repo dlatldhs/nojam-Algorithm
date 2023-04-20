@@ -3,6 +3,58 @@
 
 ## 실버
 -------
+### 1213: 팰린드롬 만들기
+```cpp
+#include <bits/stdc++.h> 
+using namespace std;
+string s;
+int ary[30],fa,last;
+vector<char> v2;
+int main() {
+// 1. 문자열 s 를 입력받음
+  ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+  cin >> s;
+  for (int i=0; s[i] != NULL; i++ ) {
+  // 2. ary에 문자열 알파벳 개수를 
+    // cout << i;
+    int alpa = s[i]-'A';
+    ary[alpa]++;
+  }
+  // 3. for 문을 돌면서 2개 인지 확인 -> 짝수인지 , 만약 홀수 인 것이 있다면 cnt++;
+  for ( int i = 0 ; i < 26 ; i++ ) {
+    if ( ary[i] == 0 ) { continue; }
+    else {
+      if ( ary[i]%2 == 0 ) { // 짝수
+        for ( int k = 0 ; k < ary[i]/2 ; k++ ) v2.push_back(char(i+'A'));
+        // 5. 아니라면 A부터 알파벳 카운트 값을 /2 한 결과 만큼 출력을 한다.그리고 마지막에 홀수 출력 
+      } 
+    
+      else { // 홀수
+        fa++;
+        last=i;
+        for (int k = 0 ; k < ary[i]/2 ; k++ ) v2.push_back( char(i+'A') );
+      }
+    }
+  }
+  // 4. cnt가 2가 된다면 "I'm Sorry Hansoo" 출력 
+  if ( fa >= 2 ) {
+    cout << "I'm Sorry Hansoo";
+    return 0;
+  }
+  // 6. 이걸reverse() 함수를 써서 출력 함
+  
+  if (s.size() %2 == 1 ) { // 홀수라면
+    v2.push_back( char(last+'A') );
+    for ( auto it : v2 ) cout << it;
+    v2.pop_back();
+  } else {
+    for ( auto it : v2 ) cout << it;
+  }
+  reverse( v2.begin() , v2.end() );
+  for ( auto it : v2 ) cout << it;
+  return 0;
+}
+```
 ### 1620번: 나는야 포켓몬 마스터 이다솜
 ```cpp
 #include <bits/stdc++.h>
@@ -59,6 +111,45 @@ int main() {
 ```
 > 부가 설명 : `max(maxed , psum[i] - psum[i-k] )` 이렇게 코드가 작성되는 이유는 5번 만큼의 누적합을 구하기 위해서이다. i가 k 즉 얼마만큼의 누적합을 구할 것인가를 나타내는 변수인데 이거를 i 시작에 넣음으로써 맨 처음에는 k만큼의 누적합을 보여주게 되고 그 다음부터는 i++ 되면서 i-k 를 하게 되면 1의 누적합 개수를 뺴게 된다. 그러면 점차 하나하나씩 올라가는 구조임을 알 수 가 있다. 그래서 6의 누적합 - 1의 누적합 하면 23456까지 되니까 이런 방식으로 코드를 짠거임
 
+### 9375: 패션왕 신해빈
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int n , m;
+string s1,s2;
+int main() {
+  ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+  // 입력 받기(testcase)
+  cin >> n;
+
+  while(n--) { // testcase 수 만큼 반복
+    map<string,int> _mp;
+
+    // 옷의 개수 입력받기
+    cin >> m;
+    for (int i = 0 ; i<m; i++) {
+      // s1: 옷 이름 , s2: 옷 종류
+      cin >> s1 >> s2;
+      // 옷 이름 필요 X , 옷 종류만 cnt;
+      _mp[s2]++;
+    }
+
+    // 경우의 수 계산
+    long long sum =1; // * 할 때 0이면 값이 안들감
+
+    // 모든 경우의 수 계산 종류 * 종류
+    for (auto it : _mp ) {
+      sum *= ((long long)it.second +1 ); // 종류마다 하나씩 가능 -> 각 종류수 + 그 종류를 입지 않을 경우 1
+    }
+
+    // 아무것도 입지 않을 경우의 수 제거
+    sum--;
+
+    cout << sum << "\n";
+  }
+  return 0;
+}
+```
 ### 9996
 ```cpp
 #include <bits/stdc++.h>
