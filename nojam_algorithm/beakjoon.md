@@ -85,6 +85,34 @@ int main() {
   return 0;
 }
 ```
+### 1940: 주몽
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int n, m, tmp, cnt, sum, k = 2;
+int ary[15004];
+int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  cin >> n;
+  cin >> m;
+  for (int i = 0; i < n; i++) {
+    cin >> ary[i];
+  }
+
+  for ( int i = 0 ; i < n ; i++ ) {
+    for ( int k = i+1 ; k < n ; k++ ) {
+      if ( ary[i]+ary[k] == m ) {
+        cnt++;
+      }
+    }
+  }
+  
+  cout << cnt;
+  return 0;
+}
+```
 ### 2559
 ```cpp
 #include <bits/stdc++.h>
