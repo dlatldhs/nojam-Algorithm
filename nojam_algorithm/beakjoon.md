@@ -142,28 +142,30 @@ int main() {
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-int n,cnt,gw;
+int n, cnt;
 string s;
-int vali[100004];
-pair<int,int> p;
 int main() {
-  ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
   cin >> n;
-  for ( int i = 0 ; i < n ; i++ ) {
+  for (int i = 0; i < n; i++) {
     cin >> s;
-    if ( s.size() & 1 ) {// s.size 홀수
-      
-    } else {
-      for ( int k=0 ; k < s.size(); k++ ) {
-        for ( int l=k+1; l < s.size()-k; l++ ) {
-          if ( s[k] == s[l] ) {
-            p = {k,l};
-          }
-        }
-      }
+    stack<char> stk;
+    for (char it : s) {
+      if (stk.size() > 0 && // 여기 이거 안하면 참조 에러 뜸 값이 없는 것을 불러와서 
+          it == stk.top()) // 사이즈가 없는 것을 체크해서 예외 처리 
+        stk.pop();
+      else
+        stk.push(it);
+    }
+    if (stk.size() == 0) {
+      cnt++;
     }
   }
-  cout << gw;
+
+  cout << cnt;
+  return 0;
 }
 ```
 ### 9375: 패션왕 신해빈
