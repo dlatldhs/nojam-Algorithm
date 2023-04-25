@@ -3,6 +3,26 @@
 
 ## 실버
 -------
+### 1629: 곱셈
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll A , B , C,na,ret;
+ll go( ll A , ll B ) {
+  if ( B == 1 ) return A%C;
+  ret = go(A,B/2);
+  ret = (ret*ret)%C;
+  if ( B%2 ) ret = (ret*A)%C;
+  return ret;
+}
+int main() {
+  ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+  cin >> A >> B >> C;
+  na = go(A,B);
+  cout << na;
+}
+```
 ### 1213: 팰린드롬 만들기
 ```cpp
 #include <bits/stdc++.h> 
