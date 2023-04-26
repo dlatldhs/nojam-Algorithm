@@ -188,6 +188,34 @@ int main() {
   return 0;
 }
 ```
+### 4375: 1
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+typedef unsigned long long ll;
+int cnt;
+ll sum, simp;
+int i, n;
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+  while (cin>>n) {
+    simp = 1;
+    cnt = 1;
+    while (1) {
+      if (simp % n == 0) { // 111111111 == n;
+        cout << cnt << "\n";
+        break;
+      } else { // 11111111111 != n;
+        simp = (simp * 10) + 1;
+        simp %= n;
+        cnt++;
+      }
+    }
+  }
+  return 0;
+}
+```
+
 ### 9375: 패션왕 신해빈
 ```cpp
 #include <bits/stdc++.h>
