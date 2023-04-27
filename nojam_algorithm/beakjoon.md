@@ -511,3 +511,43 @@ int main() {
   return 0;
 }
 ```
+### 27961: 고양이는 많을수록 좋다
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+typedef unsigned long long ull;
+ull n;
+int cnt, p = 10;
+int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  cin >> n;
+  // if (n == 0) {
+  //   cout << 0;
+  //   return 0;
+  // }
+  // while (1) {
+  //   if (n == 1) {
+  //     cout << cnt + 1;
+  //     break;
+  //   }
+  //   n /= 2;
+  //   if (n % 2 == 1 && n != 1) {
+  //     n += 1;
+  //   }
+  //   cnt++;
+  // }
+  while ( n > 3 ) {
+    cnt++;
+    if (n%2==1) {
+      n=n/2+1;
+    }
+    else {
+      n/=2;
+    }
+  }
+  cout << cnt+n;
+  return 0;
+}
+```
