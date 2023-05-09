@@ -150,3 +150,65 @@ int main(){
 10번으로부터 24번까지 최단거리는 : 3
 */
 ```
+### bfs 연습 문제2
+```cpp
+/*
+맵의 세로길이 N과 가로길이 M이 주어지고 이어서 N*M 의 맵이 주어진다. 그 다음줄의 승원이의 위치(y,x)와 당근마켓의 위치(y,x)가 주어진다.
+맵의 1은 육지, 0은 바다를 가리킨다. 승원이는 상하좌우와 육지로만 갈 수 있다. "한칸" 움질일 때 "당근한개"가 소모된다면
+승원이는 당근을 최소 몇개 소모해야 하는지 출력하라.
+
+범위
+1 <= N <= 100
+1 <= M <= 100
+
+예제 입력
+5 5
+0 0
+4 4
+1 0 1 0 1
+1 1 1 0 1
+0 0 1 1 1
+0 0 1 1 1
+0 0 1 1 1
+
+예제 출력
+9
+*/
+#include <bits/stdc++.h>
+using namespace std;
+vector<int> adj[100];
+int visited[100][100],a[104][104];
+int N,M,py,px,cy,cx,ret,ey,ex;
+int dy[] = {-1,0,1,0} , dx[] = {0,1,0,-1};
+void dfs( int py , int px ) {
+    queue<pair<int,int>> q;
+    visited[py][px] = 1;
+    q.push({py,px});
+    while( q.size() ) {
+        tie(py,px) = q.front(); q.pop();
+        for ( int i = 0 ; i < 4 ; i++ ) {
+            int my = py + dy[i] , mx = px + dx[i];
+            if ( my < 0 || mx < 0 || my >= N || mx >= M ) continue;
+            if ( visited[my][mx] ) continue;
+            if ( !a[my][mx] ) continue;
+            cout << my << " : " << mx << "\n";
+            q.push({my,mx});
+            visited[my][mx] = visited[py][px] + 1;
+        }
+    }
+}
+int main() {
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    cin >> N >> M;
+    cin >> py >> px;
+    cin >> cy >> cx;
+    for ( int i=0 ; i<N ; i++ ) {
+        for ( int k=0; k<M; k++ ) {
+            cin >> a[i][k];
+        }
+    }
+    dfs(py,px);
+    cout << visited[cy][cx];
+    return 0;
+}
+```
