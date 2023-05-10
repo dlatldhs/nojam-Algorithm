@@ -3,6 +3,57 @@
 
 ## 실버
 -------
+### 1012: 유기농 배추
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int T,M,N,K,b1,b2;
+const int P = 54;
+int visited[P][P], a[P][P], dy[] = {-1,0,1,0}, dx[] = {0,1,0,-1}, cnt;
+void dfs( int by , int bx ) {
+
+    visited[by][bx]=1;
+    
+    for ( int i = 0 ; i < 4 ; i++ ) {
+        int py = by + dy[i];
+        int px = bx + dx[i];
+        if ( py < 0 || px < 0 || py >= M || px >= N ) continue;
+        if ( a[py][px] == 0 ) continue;
+        if ( visited[py][px] ) continue;
+        dfs(py,px);
+    }
+    return;
+}
+int main () {
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+
+    cin >> T; // 테스트 케이스 갯수
+    while (T--) {
+        cin >> M >> N >> K; // 가로 세로 배추 심을 갯수
+        cnt = 0;
+        for ( int i = 0 ; i < K ; i++ ) {
+            cin >> b1 >> b2;
+            a[b1][b2] = 1;
+        }
+        
+        // connect compoents 갯수 출력
+        for ( int i = 0 ; i < M; i++ ) {
+            for ( int k = 0 ; k < N; k++ ) {
+                if ( a[i][k] && !visited[i][k] ) {
+                    cnt++;
+                    dfs(i,k);
+                }
+            }
+        }
+        cout << cnt << "\n";
+        
+        // map 초기화 visited 초기화 하기!!!
+        memset(a,0,sizeof(a));
+        memset(visited,0,sizeof(visited));
+    }
+    return 0;
+}
+```
 ### 1213: 팰린드롬 만들기
 ```cpp
 #include <bits/stdc++.h> 
