@@ -3,26 +3,6 @@
 
 ## 실버
 -------
-### 1629: 곱셈
-```cpp
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-ll A , B , C,na,ret;
-ll go( ll A , ll B ) {
-  if ( B == 1 ) return A%C;
-  ret = go(A,B/2);
-  ret = (ret*ret)%C;
-  if ( B%2 ) ret = (ret*A)%C;
-  return ret;
-}
-int main() {
-  ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-  cin >> A >> B >> C;
-  na = go(A,B);
-  cout << na;
-}
-```
 ### 1213: 팰린드롬 만들기
 ```cpp
 #include <bits/stdc++.h> 
@@ -103,6 +83,69 @@ int main() {
     }
   }
   return 0;
+}
+```
+### 1629: 곱셈
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll A , B , C,na,ret;
+ll go( ll A , ll B ) {
+  if ( B == 1 ) return A%C;
+  ret = go(A,B/2);
+  ret = (ret*ret)%C;
+  if ( B%2 ) ret = (ret*A)%C;
+  return ret;
+}
+int main() {
+  ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+  cin >> A >> B >> C;
+  na = go(A,B);
+  cout << na;
+}
+```
+### 2178 미로 탐색
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int visited[104][104];
+int N,M,dy[]={-1,0,1,0},dx[]={0,1,0,-1},a[104][104];
+string s;
+void bfs(int y,int x) {
+    // cout << "bfs!!!";
+    queue<pair<int,int>> q;
+    visited[y][x]=1;
+    q.push({y,x});
+    while ( q.size() ) {
+        tie(y,x) = q.front(); q.pop();
+        for ( int i = 0 ; i < 4 ; i++ ) {
+            int ty = y+dy[i], tx = x+dx[i];
+            if ( ty < 0 || tx < 0 || ty >= N || tx >= M ) continue;
+            if ( visited[ty][tx] ) continue;
+            if ( !a[ty][tx] ) continue;
+            q.push({ty,tx});
+            visited[ty][tx] = visited[y][x] + 1;
+        }
+    }
+}
+int main() {
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    cin >> N >> M;
+    cin.ignore();
+    for ( int i=0; i<N; i++ ) {
+        getline(cin,s);
+        int k = 0;
+        for ( char ch : s ) {
+            a[i][k] = ch-'0';
+            k++;
+        }
+    }
+
+    bfs(0,0);
+    cout << visited[N-1][M-1];
+    return 0;
+
 }
 ```
 ### 1940: 주몽
