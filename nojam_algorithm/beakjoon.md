@@ -3,6 +3,49 @@
 
 ## 실버
 -------
+### 2468: 안전 영역
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+const int V = 104;
+int visited[V][V], a[V][V],N,i,cnt,ny,nx,dy[] = {-1,0,1,0}, dx[] = {0,1,0,-1},sm=-1,p=1;
+void dfs(int y , int x, int rain) {
+    visited[y][x] = 1;
+    for ( int i = 0 ; i < 4 ; i++ ) {
+        ny = y + dy[i]; nx = x + dx[i];
+        if ( ny < 0 || nx < 0 || ny >= N || nx >= N ) continue;
+        if ( visited[ny][nx] ) continue;
+        if ( a[ny][nx] <= rain ) continue;
+        dfs(ny,nx,rain);
+    }
+}
+int main() {
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    cin >> N;
+    for ( int i = 0 ; i < N ; i++ ) {
+        for (int k = 0; k < N; k++ ) {
+            cin >> a[i][k];
+        }
+    }
+    
+    for ( int rain=0; rain <=100; rain++ ) {
+        cnt = 0;
+        for ( int i = 0 ; i < N; i++ ) {
+            for ( int k = 0 ; k< N; k++ ) {
+                if ( !visited[i][k] && a[i][k] > rain ) {
+                    dfs(i,k,rain);
+                    cnt++;
+                }
+            }
+        }
+        if (cnt > sm) {
+            sm = cnt;
+        }
+        memset(visited,0,sizeof(visited));
+    }
+    cout << sm;
+}
+```
 ### 1012: 유기농 배추
 ```cpp
 #include <bits/stdc++.h>
