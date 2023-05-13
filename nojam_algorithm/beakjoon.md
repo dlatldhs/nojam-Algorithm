@@ -3,6 +3,56 @@
 
 ## 실버
 -------
+### 2583: 영역 구하기
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+const int V = 104;
+int N,M,K,ly,lx,ry,rx,cnt,ret,ny,nx;
+int a[V][V], visited[V][V];
+int dy[] = {-1,0,1,0},dx[] = {0,1,0,-1};
+vector<int> v;
+void dfs( int y, int x ) {
+    cnt++;
+    visited[y][x] = 1;
+    for ( int i = 0 ; i < 4 ; i++ ) {
+        ny = y + dy[i]; nx = x + dx[i];
+        if ( ny < 0 || nx < 0 || ny >= M || nx >=N ) continue;
+        if ( visited[ny][nx] ) continue;
+        if ( a[ny][nx] ) continue;
+        dfs(ny,nx);
+    }
+}
+int main() {
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    cin >> M >> N >> K;
+    while (K--) {
+        cin >> ly >> lx >> ry >> rx;
+        for ( int i = lx, p1=(rx-lx);p1;i++,p1-- ) {
+            for ( int j = ly, p2=(ry-ly);p2;j++,p2--) {
+                a[i][j] = 1;
+            }
+        }
+    }
+
+    for ( int i = 0; i<M; i++ ) {
+        for ( int j = 0; j<N; j++ ) {
+            if ( a[i][j] == 0 && !visited[i][j] ) {
+                dfs(i,j);
+                v.push_back(cnt);
+                ret++;
+                cnt=0;
+            }
+        }
+    }
+    cout << ret << "\n";
+    sort(v.begin(),v.end());
+    for ( int i = 0 ; i < ret; i++ ) {
+        if ( i == 0 ) cout << v[i];
+        else cout << " " << v[i];
+    }
+}
+```
 ### 2468: 안전 영역
 ```cpp
 #include <bits/stdc++.h>
