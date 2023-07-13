@@ -3,6 +3,74 @@
 
 ## 실버
 -------
+### 2828: 사과 담기 게임
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// vriables
+int N, M, J, K, a;
+int apples[25];
+int max_l, max_r, ret;
+
+int main() {
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+
+    // screen => N, box => M
+    cin >> N >> M;
+
+    // how many apple 
+    cin >> J;
+
+    for ( int i = 0 ; i < J ; i++ ) {
+        cin >> a;
+        apples[i] = a-1;
+    }
+
+    
+    // 바구니 제일 왼쪽 좌표;
+    max_l = 0;
+
+    // 바구니 제일 오른쪽 좌표;
+    max_r = M-1;
+    
+    while ( K != J ) {
+        
+        // 만약 바구니 제일 왼쪽 좌표 <= 사과 좌표 && 사과 좌표 <= 바구니 제일 오른쪽 좌표 라면 ?
+        if ( max_l <= apples[K] && apples[K] <= max_r ) {
+            // 통과하고 다음사과로 넘어감
+            K++;
+        }
+
+        // else if 바구니 보다 왼쪽에 있을 때
+        else if ( (max_l > apples[K] && apples[K] <= max_r) || ( max_l == max_r && max_l > apples[K] ) ) {
+
+            // 바구니 가동범위 왼쪽으로 이동
+            max_l--; max_r--;
+
+            // 이동거리++
+            ret++;
+        }
+
+        // else if 바구니 보다 오른쪽에 있을 때
+        else if ( (max_l <= apples[K] && max_r <= apples[K]) || ( max_l == max_r && max_l < apples[K] ) ) {
+            
+            // 바구니 가동범위 오른쪽으로 이동
+            max_l++; max_r++;
+            
+            // 이동거리++
+            ret++;
+        }
+    }
+
+    // print 이동거리
+    cout << ret << "\n";
+
+    return 0;
+
+}
+```
+
 ### 18353: 병사 배치하기
 ```cpp
 #include <bits/stdc++.h>
